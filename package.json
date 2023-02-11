@@ -1,0 +1,33 @@
+{
+  "name": "tinyforecast",
+  "version": "1.0.0",
+  "description": "simple weather forecast app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinardsZ/Weather-Forecast-App.git"
+  },
+  "keywords": [
+    "weather",
+    "forecast"
+  ],
+  "author": "Linards Z",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinardsZ/Weather-Forecast-App/issues"
+  },
+  "homepage": "https://github.com/LinardsZ/Weather-Forecast-App#readme",
+  "devDependencies": {
+    "jquery": "^3.6.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "gsap": "^3.11.4",
+    "install": "^0.13.0",
+    "npm": "^9.4.1"
+  }
+}

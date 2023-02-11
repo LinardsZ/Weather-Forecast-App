@@ -1,0 +1,234 @@
+@font-face {
+  font-family: "Poppins";
+  font-weight: 200;
+  src: url("../fonts/poppins-extralight.woff2") format("woff2"),
+       url("../fonts/poppins-extralight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 200;
+  font-style: italic;
+  src: url("../fonts/poppins-extralightitalic.woff2") format("woff2"),
+       url("../fonts/poppins-extralightitalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 300;
+  src: url("../fonts/poppins-light.woff2") format("woff2"),
+       url("../fonts/poppins-light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 300;
+  font-style: italic;
+  src: url("../fonts/poppins-lightitalic.woff2") format("woff2"),
+       url("../fonts/poppins-lightitalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  src: url("../fonts/poppins-regular.woff2") format("woff2"),
+       url("../fonts/poppins-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-style: italic;
+  src: url("../fonts/poppins-italic.woff2") format("woff2"),
+       url("../fonts/poppins-italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  src: url("../fonts/poppins-medium.woff2") format("woff2"),
+       url("../fonts/poppins-medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: italic;
+  src: url("../fonts/poppins-mediumitalic.woff2") format("woff2"),
+       url("../fonts/poppins-mediumitalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  src: url("../fonts/poppins-semibold.woff2") format("woff2"),
+       url("../fonts/poppins-semibold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-style: italic;
+  src: url("../fonts/poppins-semibolditalic.woff2") format("woff2"),
+       url("../fonts/poppins-semibolditalic.woff") format("woff");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* colors */
+  --lightgrey: #E0E0E012;
+  --white: #FFFFFF;
+  --blue: #0047AB;
+  
+  /* font custom variables */
+  --extra-light: 200;
+  --light: 300;
+  --regular: 400;
+  --bolder: 500;
+  --bold: 600;
+
+
+  --search-size: 2rem;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-image: url("../images/river-5524569-compressed.jpg");
+  background-size: cover;
+  backdrop-filter: brightness(50%);
+  font-family: "Poppins", "Roboto", system-ui, -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  background: var(--lightgrey);
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+  /* backdrop-filter: blur(10px); */
+  /**/
+  height: 800px;
+  width: 1200px;
+  padding: 1.5rem 2rem;
+}
+
+/* SEARCH FIELD CONTAINER STYLING */
+
+.search-container {
+  grid-column: span 1;
+  grid-row: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  height: var(--search-size);
+  width: var(--search-size);
+}
+
+.search-btn:hover {
+  cursor: pointer;
+}
+
+.search-icon {
+  height: 100%;
+  width: 100%;
+  color: var(--white);
+}
+
+.search-field {
+  border: none;
+  border-radius: 1rem;
+  outline-color: var(--blue);
+  padding: 4px 12px;
+  height: var(--search-size);
+  width: 40%;
+}
+
+/* FORECAST CONTAINER STYLING */
+
+.forecast-container {
+  grid-column: span 1;
+  grid-row: 2 / 3;
+  position: relative;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 1fr;
+}
+
+.weather-icon {
+  position:absolute;
+}
+
+.daily-forecast {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.daily-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.current-temperature {
+  color: var(--white);
+  font-weight: var(--bold);
+  font-size: 5rem;
+}
+
+.current-weather {
+  color: var(--white);
+  font-weight: var(--bold);
+  font-size: 2.5rem;
+}
+
+
+.daily-info > img {
+  height: 150px;
+  width: auto;
+}
+
+
+
+.svg-large {
+  height: 150px;
+  width: auto;
+}
+
+.hidden {
+  display: none;
+}
