@@ -8,8 +8,15 @@ let currentTime;
 let daily = {};
 let hourly = {};
 
-async function api() {
-  return fetch("https://api.open-meteo.com/v1/forecast?latitude=56.94&longitude=24.10&current_weather=true&timeformat=iso8601&windspeed_unit=ms&temperature_unit=celsius&precipitation_unit=mm&timezone=auto&hourly=temperature_2m,windspeed_10m,winddirection_10m,precipitation,weathercode&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,sunrise,sunset")
+let geo = navigator.geolocation.getCurrentPosition(bb, bb);
+
+function bb(data) {
+  console.log(data);
+  api(data.coords.latitude, data.coords.longitude);
+}
+
+async function api(latitude, longitude) {
+  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timeformat=iso8601&windspeed_unit=ms&temperature_unit=celsius&precipitation_unit=mm&timezone=auto&hourly=temperature_2m,windspeed_10m,winddirection_10m,precipitation,weathercode&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,sunrise,sunset`)
   .then(result => result.json())
   .then(data => {
     console.log(data);
@@ -18,8 +25,6 @@ async function api() {
   });
 
 }
-
-api();
 
 function setInfo(data) {
   currentTemperature = getTemperature(data["current_weather"]["temperature"]);
