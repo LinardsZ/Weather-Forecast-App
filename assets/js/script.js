@@ -8,12 +8,11 @@ let currentTime;
 let daily = {};
 let hourly = {};
 
-let geo = navigator.geolocation.getCurrentPosition(bb, bb);
-
-function bb(data) {
-  console.log(data);
+navigator.geolocation.getCurrentPosition((data) => {
   api(data.coords.latitude, data.coords.longitude);
-}
+}, () => {
+  console.error("Geolocation blocked by user");
+});
 
 async function api(latitude, longitude) {
   return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timeformat=iso8601&windspeed_unit=ms&temperature_unit=celsius&precipitation_unit=mm&timezone=auto&hourly=temperature_2m,windspeed_10m,winddirection_10m,precipitation,weathercode&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,sunrise,sunset`)

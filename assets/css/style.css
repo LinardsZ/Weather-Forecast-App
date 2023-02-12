@@ -223,7 +223,7 @@ body {
 
 .hourly-forecast::-webkit-scrollbar {
   height: 12px;
-  background: none;
+  background: var(--white);
 }
 
 .hourly-forecast::-webkit-scrollbar-button {
