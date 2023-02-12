@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <script src="./assets/js/script.js"></script>
-  <title>Document</title>
+  <script src="./assets/js/script.js" defer></script>
+  <title>Weather Forecast</title>
 </head>
   <body>
     <div class="app">
@@ -22,20 +22,26 @@
       </div>
       
       <div class="forecast-container">
-        <div class="daily-forecast">
-          <div class="daily-summary">
+        <div class="current-forecast">
+          <div class="current-summary">
             <div class="flex-col">
-              <p class="current-temperature">17&deg; C</p>
-              <p class="current-weather">Sunny</p>
+              <p class="current-temperature fs-large bold"></p>
+              <p class="current-weather fs-larger bold"></p>
             </div>
-            <img class="svg-large" src="./assets/svg/sunny.svg">
+            <img class="svg-large current-weather-icon" src="./assets/svg/na.svg">
           </div>
-          <div class="daily-info">
-            <p class="">Precipitation: <span>35.4&percnt;</span></p>
+          <div class="current-info fs-medium">
+            <p class="light">Precipitation: <span class="current-precipitation"></span></p>
+            <p class="light">Wind: 
+              <span class="current-winddirection"></span>
+              <span class="current-windspeed"></span>
+            </p>
+            <p class="light">Sunrise: <span class="sunrise"></span></p>
+            <p class="light">Sunset: <span class="sunset"></span></p>
           </div>
         </div>
         <div class="hourly-forecast">
-
+            
         </div>
       </div>
     </div>
