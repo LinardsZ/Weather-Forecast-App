@@ -2,6 +2,8 @@
 
 This is a project of a browser based single page weather forecast app.
 
+Note: In order to resolve location search to coordinates, an API key from Geoapify must be provided, otherwise search functionality will not work. 
+
 ## Technologies and Tools used
 ```
 VS Code
