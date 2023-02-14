@@ -1,28 +1,92 @@
 "use strict";
 
-let currentTemperature;
-let currentWeatherCode;
-let currentWindDirection;
-let currentWindSpeed;
-let currentTime;
+const API_KEY = "e297c4ba5f00425890fc634d1e96c62b"; //DELETE THIS BEFORE COMMITING
+let testing = encodeURI(`https://api.geoapify.com/v1/geocode/search?text=Riga&format=json&limit=1&apiKey=${API_KEY}`);
+
+const appElement = document.querySelector(".app");
+const searchModalElement= document.querySelector(".search-modal");
+
+const startpageSearchForm = document.querySelector(".startpage-search");
+const startpageSearchField = document.getElementById("search");
+
+const appSearchForm = document.querySelector(".search-form");
+const appSearchField = document.getElementById("text");
+
+const hourlyForecastContainer = document.querySelector(".hourly-forecast");
+
+const currentTempElem = document.querySelector(".current-temperature");
+const currentWeatherElem = document.querySelector(".current-weather");
+const currentPlaceElem = document.querySelector(".current-place");
+const currentWindDirectonElem = document.querySelector(".current-winddirection");
+const currentWindSpeedElem = document.querySelector(".current-windspeed");
+const currentPrecipitationElem = document.querySelector(".current-precipitation");
+const sunriseElem = document.querySelector(".sunrise");
+const sunsetElem = document.querySelector(".sunset");
+const weatherIconElem = document.querySelector(".current-weather-icon");
+
+let currentTemperature = null;
+let currentWeatherCode = null;
+let currentWindDirection = null;
+let currentWindSpeed = null;
+let currentTime = null;
 let daily = {};
 let hourly = {};
 
+startpageSearchForm.addEventListener("submit", handleFormSubmit);
+appSearchForm.addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  let input;
+
+  if (e.target.classList.contains("startpage-search")) {
+    input = startpageSearchField.value;
+    switchViews();
+    startpageSearchField.value = "";
+  }
+  else {
+    input = appSearchField.value;
+    appSearchField.value = "";
+  }
+  
+  fetch(encodeURI(`https://api.geoapify.com/v1/geocode/search?text=${input}&format=json&limit=1&apiKey=${API_KEY}`)) // TODO: Show error if no results were found
+    .then(response => response.json())
+    .then(data => {
+      let latitude = Number.parseFloat(data.results[0].lat).toFixed(2);
+      let longitude = Number.parseFloat(data.results[0].lon).toFixed(2);
+      let address = {
+        city: data.results[0].city,
+        state: data.results[0].state,
+        country: data.results[0].country,
+      };
+
+      hourlyForecastContainer.innerHTML = "";
+
+      getWeatherForecast(latitude, longitude, address);
+    });
+}
+
 navigator.geolocation.getCurrentPosition((data) => {
-  api(data.coords.latitude, data.coords.longitude);
+  getWeatherForecast(data.coords.latitude, data.coords.longitude);
+  switchViews();
 }, () => {
   console.error("Geolocation blocked by user");
 });
 
-async function api(latitude, longitude) {
+async function getWeatherForecast(latitude, longitude, address = null) {
   return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timeformat=iso8601&windspeed_unit=ms&temperature_unit=celsius&precipitation_unit=mm&timezone=auto&hourly=temperature_2m,windspeed_10m,winddirection_10m,precipitation,weathercode&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,sunrise,sunset`)
-  .then(result => result.json())
-  .then(data => {
-    console.log(data);
-    setInfo(data);
-    populateDOM();
-  });
+          .then(result => result.json())
+          .then(data => {
+            setInfo(data);
+            setCurrentForecast(address);
+            setHourlyForecast();
+          })
+          .catch(error => console.warn(error)); //TODO: handle cases when API call fails
+}
 
+function switchViews() {
+  appElement.classList.toggle("hidden");
+  searchModalElement.classList.toggle("hidden");
 }
 
 function setInfo(data) {
@@ -129,23 +193,18 @@ function setHourlyData(data) {
   hourly.windSpeed = data["windspeed_10m"].slice(0, 24).map(wSpeed => getWindSpeed(wSpeed));
 }
 
-const currentTempElem = document.querySelector(".current-temperature");
-const currentWeatherElem = document.querySelector(".current-weather");
-const currentWindDirectonElem = document.querySelector(".current-winddirection");
-const currentWindSpeedElem = document.querySelector(".current-windspeed");
-const currentPrecipitationElem = document.querySelector(".current-precipitation");
-const sunriseElem = document.querySelector(".sunrise");
-const sunsetElem = document.querySelector(".sunset");
-const weatherIconElem = document.querySelector(".current-weather-icon");
-
-function populateDOM() {
-  setCurrentForecast();
-  setHourlyForecast();
-}
-
-function setCurrentForecast() {
+function setCurrentForecast(address) {
   currentTempElem.textContent = currentTemperature;
   currentWeatherElem.textContent = currentWeatherCode;
+
+  if (address !== null) {
+    let params = [
+      address.city ?? address.state ?? "",
+      address.country,
+    ]
+    currentPlaceElem.textContent = params.filter(string => string).join(", "); //we filter out empty strings to avoid redundant separators
+  }
+
   currentWindDirectonElem.textContent = currentWindDirection;
   currentWindSpeedElem.textContent = currentWindSpeed;
   currentPrecipitationElem.textContent = daily.precipitation;
@@ -156,8 +215,6 @@ function setCurrentForecast() {
 }
 
 function setHourlyForecast() {
-  const hourlyForecastContainer = document.querySelector(".hourly-forecast");
-
   for (let i = 0; i < 24; ++i) {
     let element = createCardDiv(
       hourly.temperature[i],
