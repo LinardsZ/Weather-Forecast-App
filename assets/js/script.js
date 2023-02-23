@@ -1,6 +1,6 @@
 "use strict";
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = "471a5498175f4ea68574d9f896d340bd";
 let testing = encodeURI(`https://api.geoapify.com/v1/geocode/search?text=Riga&format=json&limit=1&apiKey=${API_KEY}`);
 
 const appElement = document.querySelector(".app");
