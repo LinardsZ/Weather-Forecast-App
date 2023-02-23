@@ -32,6 +32,11 @@ let currentTime = null;
 let daily = {};
 let hourly = {};
 
+window.onload = function() {
+  appElement.classList.add("hidden");
+  searchModalElement.classList.remove("hidden");
+}
+
 startpageSearchForm.addEventListener("submit", handleFormSubmit);
 appSearchForm.addEventListener("submit", handleFormSubmit);
 
