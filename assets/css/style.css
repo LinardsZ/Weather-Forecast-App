@@ -122,27 +122,28 @@ body {
 
 .search-modal {
   background: var(--lightgrey-transparent);
-  border-radius: 25px;
+  border-radius: 1.5em;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   height: 800px;
   width: 1200px;
-  padding: 1.5rem 2rem;
+  padding: 1.5em 2em;
 }
 
 .startpage-search {
   display: flex;
-  gap: 16px;
+  gap: 1em;
   justify-content: center;
   align-items: center;
+  margin-top: 15em;
   width: 100%;
 }
 
 .app {
   background: var(--lightgrey-transparent);
-  border-radius: 25px;
+  border-radius: 1.3em;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content 1fr;
@@ -150,7 +151,7 @@ body {
   /**/
   height: 800px;
   width: 1200px;
-  padding: 1.5rem 2rem;
+  padding: 1.5em 2em;
 }
 
 /* SEARCH FIELD CONTAINER STYLING */
@@ -158,15 +159,20 @@ body {
 .search-container {
   grid-column: span 1;
   grid-row: span 1;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  padding-bottom: 1rem;
+  align-items: center; */
+  padding-bottom: 1em;
+}
+
+.error-msg {
+  text-align: center;
+  padding-top: 1em;
 }
 
 .search-form {
   display: flex;
-  gap: 16px;
+  gap: 1em;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -198,9 +204,9 @@ body {
 
 .search-field {
   border: none;
-  border-radius: 1rem;
+  border-radius: 1em;
   outline-color: var(--blue);
-  padding: 4px 12px;
+  padding: .25em .75em;
   height: var(--search-size);
   width: 40%;
 }
@@ -225,7 +231,7 @@ body {
 .current-summary {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.5em;
 }
 
 .current-place {
@@ -237,11 +243,11 @@ body {
 .flex-col {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1em;
 }
 
 .current-info > p {
-  margin-top: 1rem;
+  margin-top: 1em;
 }
 
 .hourly-forecast {
@@ -288,12 +294,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2em;
   height: 100%;
   width: 25%;
   min-width: 200px;
   flex-shrink: 0;
-  padding: 1rem;
+  padding: 1em;
 }
 
 .forecast-card:not(:last-child) {
@@ -310,9 +316,9 @@ body {
 .card-bottom {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1em;
   width: 100%;
-  padding-top: 3rem;
+  padding-top: 3em;
   padding-left: 10%;
 }
 
